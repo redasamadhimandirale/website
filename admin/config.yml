@@ -1,0 +1,314 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+
+# GitHub: set repo to your fork if different. For OAuth on GitHub Pages, see docs/SVELTIA-CMS.md
+backend:
+  name: github
+  repo: redasamadhimandirale/website
+  branch: main
+  # GitHub Pages cannot run OAuth; deploy tools/cms-github-oauth-php and set your HTTPS origin:
+  base_url: https://srsm-sveltia-cms-auth.suhas-3fe.workers.dev/
+
+site_url: https://redasamadhimandirale.github.io/website/
+
+media_folder: public/uploads
+public_folder: /uploads
+
+locale: mr
+
+collections:
+  - name: news
+    label: घडामोडी व घोषणा
+    label_singular: घडामोडी
+    icon: newspaper
+    folder: src/content/news
+    create: true
+    slug: '{{slug}}'
+    summary: '{{title.mr}}'
+    extension: md
+    format: frontmatter
+    fields:
+      - name: title
+        label: शीर्षक
+        widget: object
+        collapsed: true
+        fields:
+          - { name: mr, label: मराठी, widget: text }
+          - { name: en, label: इंग्रजी, widget: string }
+      - { name: date, label: दिनांक, widget: datetime, date_format: YYYY-MM-DD, time_format: false }
+      - name: isEmbed
+        label: फक्त सोशल मीडिया लिंक (Embed) आहे का?
+        widget: select
+        options: [yes, no]
+        default: no
+        hint: Turn on to hide manual text fields and provide an embed URL.
+      - name: embedCode
+        label: सोशल मीडिया एम्बेड कोड (Embed HTML)
+        widget: text
+        required: false
+        condition:
+          field: isEmbed
+          pattern: "yes"
+        hint: 'Paste the full embed HTML code (like <iframe>...) from YouTube, Facebook, or Instagram.'
+      - name: excerpt
+        label: सारांश
+        widget: object
+        required: false
+        collapsed: true
+        condition:
+          field: isEmbed
+          pattern: "no"
+        fields:
+          - { name: mr, label: मराठी, widget: text }
+          - { name: en, label: इंग्रजी, widget: text }
+      - { name: draft, label: मसुदा (वेबसाइटवरून लपवा), widget: boolean, default: false }
+      - {
+          name: showOnHome,
+          label: मुख्यपृष्ठावर दाखवा (नवीनतम ओळ),
+          widget: boolean,
+          default: true,
+          hint: 'Turn off to keep the post on the News page only (still public when not draft).',
+        }
+      - name: coverImage
+        label: कव्हर छायाचित्र
+        widget: image
+        required: false
+        choose_url: true
+        hint: Upload or pick from Media; optional URL tab for an existing /uploads/… path.
+        condition:
+          field: isEmbed
+          pattern: "no"
+      - name: tags
+        label: टॅग्स
+        widget: list
+        required: false
+        condition:
+          field: isEmbed
+          pattern: "no"
+        field:
+          label: टॅग
+          widget: string
+      - name: body
+        label: मुख्य मजकूर
+        widget: markdown
+        condition:
+          field: isEmbed
+          pattern: "no"
+  - name: galleries
+    label: गॅलरी
+    label_singular: गॅलरी
+    icon: gallery_thumbnail
+    folder: src/content/galleries
+    create: true
+    slug: '{{slug}}'
+    summary: '{{title.mr}}'
+    extension: json
+    format: json
+    fields:
+      - name: title
+        label: शीर्षक
+        widget: object
+        collapsed: true
+        fields:
+          - { name: mr, label: मराठी, widget: string }
+          - { name: en, label: इंग्रजी, widget: string }
+      - name: description
+        label: वर्णन
+        widget: object
+        required: false
+        collapsed: true
+        fields:
+          - { name: mr, label: मराठी, widget: text }
+          - { name: en, label: इंग्रजी, widget: text }
+      - name: coverImage
+        label: कव्हर छायाचित्र
+        widget: image
+        required: false
+        choose_url: true
+      - name: items
+        label: आयटम
+        widget: list
+        summary: '{{fields.type}} — {{fields.src}}'
+        fields:
+          - name: type
+            label: प्रकार
+            widget: select
+            options: [image, video]
+          - name: src
+            label: छायाचित्र (अपलोड) किंवा व्हिडिओ URL
+            widget: file
+            required: false
+            choose_url: true
+            hint: For type image, upload or choose a file. For type video, use the URL tab with a YouTube link.
+          - name: alt
+            label: पर्यायी मजकूर (Alt text)
+            widget: object
+            required: false
+            collapsed: true
+            fields:
+              - { name: mr, label: मराठी, widget: string }
+              - { name: en, label: इंग्रजी, widget: string }
+          - { name: youtubeId, label: YouTube ID (व्हिडिओसाठी), widget: string, required: false }
+
+  - name: site_data
+    label: साइट डेटा
+    icon: database
+    files:
+      - name: festivals
+        label: उत्सव
+        file: src/content/festivals/festivals.json
+        fields:
+          - name: festivals
+            label: उत्सव
+            widget: list
+            summary: '{{fields.slug}}'
+            fields:
+              - { name: slug, label: स्लग, widget: string }
+              - { name: order, label: क्रम, widget: number, value_type: int }
+              - name: image
+                label: पोस्टर छायाचित्र
+                widget: image
+                required: false
+                choose_url: true
+              - { name: youtubeVideoId, label: YouTube व्हिडिओ ID, widget: string, required: false }
+              - name: title
+                label: शीर्षक
+                widget: object
+                collapsed: true
+                fields:
+                  - { name: mr, label: मराठी, widget: string }
+                  - { name: en, label: इंग्रजी, widget: string }
+              - name: excerpt
+                label: सारांश
+                widget: object
+                collapsed: true
+                fields:
+                  - { name: mr, label: मराठी, widget: text }
+                  - { name: en, label: इंग्रजी, widget: text }
+              - name: paragraphs
+                label: परिच्छेद
+                widget: object
+                collapsed: true
+                fields:
+                  - name: mr
+                    label: मराठी परिच्छेद
+                    widget: list
+                    field: { label: परिच्छेद, widget: text }
+                  - name: en
+                    label: इंग्रजी परिच्छेद
+                    widget: list
+                    field: { label: परिच्छेद, widget: text }
+
+      - name: darshan_schedule
+        label: दर्शन वेळापत्रक
+        file: src/content/darshan/schedule.json
+        fields:
+          - name: notes
+            label: नोंदी
+            widget: object
+            collapsed: true
+            fields:
+              - { name: mr, label: मराठी, widget: text }
+              - { name: en, label: इंग्रजी, widget: text }
+          - name: slots
+            label: वेळा
+            widget: list
+            summary: '{{fields.label.mr}}'
+            fields:
+              - name: label
+                label: लेबल
+                widget: object
+                collapsed: true
+                fields:
+                  - { name: mr, label: मराठी, widget: string }
+                  - { name: en, label: इंग्रजी, widget: string }
+              - name: time
+                label: वेळ
+                widget: object
+                collapsed: true
+                fields:
+                  - { name: mr, label: मराठी, widget: string }
+                  - { name: en, label: इंग्रजी, widget: string }
+
+      - name: trustees
+        label: विश्वस्त
+        file: src/content/trustees/trustees.json
+        fields:
+          - name: trustees
+            label: विश्वस्त
+            widget: list
+            summary: '{{fields.name-en}} — {{fields.role}}'
+            fields:
+              - { name: name-en, label: नाव (इंग्रजी), widget: string }
+              - { name: name-mr, label: नाव (मराठी), widget: string }
+              - name: role
+                label: भूमिका (Role key)
+                widget: select
+                options:
+                  - Chairman
+                  - Vice Chairman
+                  - Secretary
+                  - Treasurer
+                  - Trustee
+                hint: Labels on the site come from i18n; this value must match the key.
+              - name: image
+                label: छायाचित्र
+                widget: image
+                required: true
+                choose_url: true
+                hint: Upload saves under public/uploads (e.g. trustees/). URL tab if the file already exists in the repo.
+
+      - name: premises_showcase
+        label: परिसर दर्शन
+        file: src/content/premises/showcase.json
+        fields:
+          - name: items
+            label: आयटम (क्रम = प्रदर्शन क्रम)
+            widget: list
+            summary: '{{fields.id}}'
+            fields:
+              - name: id
+                label: विभाग ID (i18n अद्यतनित केल्याशिवाय बदलू नका)
+                widget: select
+                options:
+                  - development
+                  - mahadwar
+                  - barav
+                  - vinamandapEast
+                  - vinamandapNorthSouth
+                  - vinamandapSoutheast
+                  - lighting
+                  - interior
+                  - garden
+              - name: image
+                label: छायाचित्र
+                widget: image
+                required: true
+                choose_url: true
+
+      - name: social_links
+        label: सामाजिक दुवे
+        file: src/content/site/social.json
+        fields:
+          - { name: facebook, label: Facebook URL, widget: string }
+          - { name: instagram, label: Instagram URL, widget: string }
+          - { name: youtube, label: YouTube URL, widget: string }
+
+      - name: history_mr
+        label: इतिहास (मराठी)
+        file: src/content/history/narrative-mr.json
+        fields:
+          - { name: openingVerses, label: सुरुवातीचे श्लोक, widget: text }
+          - name: paragraphs
+            label: परिच्छेद
+            widget: list
+            field: { label: परिच्छेद, widget: text }
+
+      - name: history_en
+        label: इतिहास (इंग्रजी)
+        file: src/content/history/narrative-en.json
+        fields:
+          - { name: openingVerses, label: सुरुवातीचे श्लोक, widget: text }
+          - name: paragraphs
+            label: परिच्छेद
+            widget: list
+            field: { label: परिच्छेद, widget: text }
