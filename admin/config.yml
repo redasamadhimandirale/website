@@ -87,9 +87,17 @@ collections:
         field:
           label: टॅग
           widget: string
-      - name: body
-        label: मुख्य मजकूर
+      - name: body_mr
+        label: मुख्य मजकूर (मराठी)
         widget: markdown
+        required: false
+        condition:
+          field: isEmbed
+          pattern: "no"
+      - name: body_en
+        label: मुख्य मजकूर (इंग्रजी)
+        widget: markdown
+        required: false
         condition:
           field: isEmbed
           pattern: "no"
@@ -312,3 +320,160 @@ collections:
             label: परिच्छेद
             widget: list
             field: { label: परिच्छेद, widget: text }
+
+      - name: nearby_places
+        label: जवळपासची प्रेक्षणीय स्थळे (Nearby Places)
+        file: src/content/nearby/places.json
+        fields:
+          - name: teasers
+            label: मुख्यपृष्ठावरील टीझर्स (Home Teasers)
+            widget: list
+            summary: '{{fields.name.mr}}'
+            fields:
+              - name: id
+                label: ID
+                widget: string
+              - name: name
+                label: नाव
+                widget: object
+                collapsed: true
+                fields:
+                  - { name: mr, label: मराठी, widget: string }
+                  - { name: en, label: इंग्रजी, widget: string }
+              - name: excerpt
+                label: सारांश
+                widget: object
+                collapsed: true
+                fields:
+                  - { name: mr, label: मराठी, widget: text }
+                  - { name: en, label: इंग्रजी, widget: text }
+              - name: image
+                label: छायाचित्र
+                widget: image
+                choose_url: true
+              - name: hash
+                label: हॅश लिंक (उदा. #ashtavinayak)
+                widget: string
+          - name: categories
+            label: वर्ग (Categories)
+            widget: list
+            summary: '{{fields.title.mr}}'
+            fields:
+              - name: id
+                label: ID
+                widget: string
+              - name: title
+                label: शीर्षक
+                widget: object
+                collapsed: true
+                fields:
+                  - { name: mr, label: मराठी, widget: string }
+                  - { name: en, label: इंग्रजी, widget: string }
+              - name: intro
+                label: प्रस्तावना
+                widget: object
+                required: false
+                collapsed: true
+                fields:
+                  - { name: mr, label: मराठी, widget: text }
+                  - { name: en, label: इंग्रजी, widget: text }
+              - name: subsections
+                label: उपविभाग
+                widget: list
+                required: false
+                summary: '{{fields.title.mr}}'
+                fields:
+                  - name: id
+                    label: ID
+                    widget: string
+                  - name: title
+                    label: शीर्षक
+                    widget: object
+                    collapsed: true
+                    fields:
+                      - { name: mr, label: मराठी, widget: string }
+                      - { name: en, label: इंग्रजी, widget: string }
+                  - name: items
+                    label: ठिकाणे
+                    widget: list
+                    summary: '{{fields.name.mr}}'
+                    fields:
+                      - name: name
+                        label: नाव
+                        widget: object
+                        collapsed: true
+                        fields:
+                          - { name: mr, label: मराठी, widget: string }
+                          - { name: en, label: इंग्रजी, widget: string }
+                      - name: location
+                        label: ठिकाण (कंसात)
+                        widget: object
+                        required: false
+                        collapsed: true
+                        fields:
+                          - { name: mr, label: मराठी, widget: string }
+                          - { name: en, label: इंग्रजी, widget: string }
+                      - name: image
+                        label: छायाचित्र
+                        widget: image
+                        required: false
+                        choose_url: true
+              - name: items
+                label: ठिकाणे
+                widget: list
+                required: false
+                summary: '{{fields.name.mr}}'
+                fields:
+                  - name: name
+                    label: नाव
+                    widget: object
+                    collapsed: true
+                    fields:
+                      - { name: mr, label: मराठी, widget: string }
+                      - { name: en, label: इंग्रजी, widget: string }
+                  - name: location
+                    label: ठिकाण (कंसात)
+                    widget: object
+                    required: false
+                    collapsed: true
+                    fields:
+                      - { name: mr, label: मराठी, widget: string }
+                      - { name: en, label: इंग्रजी, widget: string }
+                  - name: image
+                    label: छायाचित्र
+                    widget: image
+                    required: false
+                    choose_url: true
+
+      - name: contact_info
+        label: संपर्क माहिती (Contact Info)
+        file: src/content/site/contact.json
+        fields:
+          - name: addressLine1
+            label: पत्ता ओळ १ (Address Line 1)
+            widget: object
+            collapsed: true
+            fields:
+              - { name: mr, label: मराठी, widget: string }
+              - { name: en, label: इंग्रजी, widget: string }
+          - name: addressLine2
+            label: पत्ता ओळ २ (Address Line 2)
+            widget: object
+            collapsed: true
+            fields:
+              - { name: mr, label: मराठी, widget: string }
+              - { name: en, label: इंग्रजी, widget: string }
+          - { name: phone, label: फोन नंबर (Phone), widget: string }
+          - { name: email, label: ईमेल (Email), widget: string }
+
+      - name: donation_info
+        label: देणगी माहिती (Donation Info)
+        file: src/content/site/donation.json
+        fields:
+          - { name: accountNoValue, label: खाते क्रमांक (Account No.), widget: string }
+          - { name: ifscValue, label: IFSC कोड (IFSC Code), widget: string }
+          - { name: bankValue, label: बँकेचे नाव (Bank Name), widget: string }
+          - { name: branchValue, label: शाखा (Branch), widget: string }
+          - { name: tax80gRegistrationValue, label: 80G नोंदणी क्रमांक (80G Reg. No.), widget: string }
+          - { name: tax80gDatedValue, label: नोंदणी दिनांक (80G Dated), widget: string }
+          - { name: qrImage, label: UPI QR कोड (UPI QR Code Image), widget: image, choose_url: true }
