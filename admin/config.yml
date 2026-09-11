@@ -444,7 +444,10 @@ collections:
             fields:
               - { name: mr, label: मराठी, widget: string }
               - { name: en, label: इंग्रजी, widget: string }
-          - { name: phone, label: फोन नंबर (Phone), widget: string }
+          - name: phone
+            label: फोन नंबर (Phone)
+            widget: list
+            field: { name: number, label: नंबर (Number), widget: string }
           - { name: email, label: ईमेल (Email), widget: string }
 
       - name: donation_info
