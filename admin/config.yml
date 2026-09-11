@@ -43,18 +43,12 @@ collections:
         label: सोशल मीडिया एम्बेड कोड (Embed HTML)
         widget: text
         required: false
-        condition:
-          field: isEmbed
-          pattern: "yes"
-        hint: 'Paste the full embed HTML code (like <iframe>...) from YouTube, Facebook, or Instagram.'
+        hint: 'Paste the full embed HTML code (like <iframe>...) from YouTube, Facebook, or Instagram. (Use only if "isEmbed" is yes)'
       - name: excerpt
         label: सारांश
         widget: object
         required: false
         collapsed: true
-        condition:
-          field: isEmbed
-          pattern: "no"
         fields:
           - { name: mr, label: मराठी, widget: text }
           - { name: en, label: इंग्रजी, widget: text }
@@ -72,16 +66,10 @@ collections:
         required: false
         choose_url: true
         hint: Upload or pick from Media; optional URL tab for an existing /uploads/… path.
-        condition:
-          field: isEmbed
-          pattern: "no"
       - name: tags
         label: टॅग्स
         widget: list
         required: false
-        condition:
-          field: isEmbed
-          pattern: "no"
         field:
           name: tag
           label: टॅग
@@ -90,16 +78,10 @@ collections:
         label: मुख्य मजकूर (मराठी)
         widget: markdown
         required: false
-        condition:
-          field: isEmbed
-          pattern: "no"
       - name: body_en
         label: मुख्य मजकूर (इंग्रजी)
         widget: markdown
         required: false
-        condition:
-          field: isEmbed
-          pattern: "no"
   - name: galleries
     label: गॅलरी
     label_singular: गॅलरी
