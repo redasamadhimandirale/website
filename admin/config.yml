@@ -5,15 +5,16 @@ backend:
   name: github
   repo: redasamadhimandirale/website
   branch: main
-  # GitHub Pages cannot run OAuth; deploy tools/cms-github-oauth-php and set your HTTPS origin:
   base_url: https://oauth.redasamadhimandirale.workers.dev
+  # Note: Sveltia CMS provides a free, public authentication server by default if base_url is omitted.
+  # If you use your own worker, it must allow http://localhost:4321 as an allowed origin for local development.
 
 site_url: https://redasamadhimandirale.github.io/website/
 
 media_folder: public/uploads
 public_folder: /uploads
 
-locale: mr
+locale: en
 
 collections:
   - name: news
