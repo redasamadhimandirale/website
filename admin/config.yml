@@ -86,6 +86,7 @@ collections:
           field: isEmbed
           pattern: "no"
         field:
+          name: tag
           label: टॅग
           widget: string
       - name: body_mr
@@ -201,11 +202,11 @@ collections:
                   - name: mr
                     label: मराठी परिच्छेद
                     widget: list
-                    field: { label: परिच्छेद, widget: text }
+                    field: { name: paragraph, label: परिच्छेद, widget: text }
                   - name: en
                     label: इंग्रजी परिच्छेद
                     widget: list
-                    field: { label: परिच्छेद, widget: text }
+                    field: { name: paragraph, label: परिच्छेद, widget: text }
 
       - name: darshan_schedule
         label: दर्शन वेळापत्रक
@@ -310,7 +311,7 @@ collections:
           - name: paragraphs
             label: परिच्छेद
             widget: list
-            field: { label: परिच्छेद, widget: text }
+            field: { name: paragraph, label: परिच्छेद, widget: text }
 
       - name: history_en
         label: इतिहास (इंग्रजी)
@@ -320,7 +321,7 @@ collections:
           - name: paragraphs
             label: परिच्छेद
             widget: list
-            field: { label: परिच्छेद, widget: text }
+            field: { name: paragraph, label: परिच्छेद, widget: text }
 
       - name: nearby_places
         label: जवळपासची प्रेक्षणीय स्थळे (Nearby Places)
