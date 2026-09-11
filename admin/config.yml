@@ -3,8 +3,8 @@
 # GitHub: set repo to your fork if different. For OAuth on GitHub Pages, see docs/SVELTIA-CMS.md
 backend:
   name: github
-  repo: redasamadhimandirale/website
-  branch: main
+  repo: redasamadhimandirale/WebsiteSourceCode
+  branch: release
   base_url: https://oauth.redasamadhimandirale.workers.dev
   # NOTE: To use this worker, ensure it sends the 'Cross-Origin-Opener-Policy: same-origin-allow-popups' header.
 
