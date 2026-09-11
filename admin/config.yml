@@ -5,7 +5,7 @@ backend:
   name: github
   repo: redasamadhimandirale/website
   branch: main
-  base_url: https://oauth.redasamadhimandirale.workers.dev/
+  # base_url: https://oauth.redasamadhimandirale.workers.dev/
   # Note: Sveltia CMS provides a free, public authentication server by default if base_url is omitted.
   # If you use your own worker, it must allow http://localhost:4321 as an allowed origin for local development.
 
