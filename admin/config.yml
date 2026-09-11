@@ -5,9 +5,8 @@ backend:
   name: github
   repo: redasamadhimandirale/website
   branch: main
-  base_url: https://oauth.redasamadhimandirale.workers.dev
-  # Note: Sveltia CMS provides a free, public authentication server by default if base_url is omitted.
-  # If you use your own worker, it must allow http://localhost:4321 as an allowed origin for local development.
+  app_id: Ov23liT6MvxZ9KBGnifj
+  # Using PKCE (app_id) completely bypasses the need for the Cloudflare worker.
 
 site_url: https://redasamadhimandirale.github.io/website/
 
