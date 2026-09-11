@@ -6,7 +6,7 @@ backend:
   repo: redasamadhimandirale/website
   branch: main
   # GitHub Pages cannot run OAuth; deploy tools/cms-github-oauth-php and set your HTTPS origin:
-  base_url: https://oauth.redasamadhimandirale.workers.dev/
+  base_url: https://oauth.redasamadhimandirale.workers.dev
 
 site_url: https://redasamadhimandirale.github.io/website/
 
