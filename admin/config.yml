@@ -461,3 +461,186 @@ collections:
           - { name: tax80gRegistrationValue, label: 80G नोंदणी क्रमांक (80G Reg. No.), widget: string }
           - { name: tax80gDatedValue, label: नोंदणी दिनांक (80G Dated), widget: string }
           - { name: qrImage, label: UPI QR कोड (UPI QR Code Image), widget: image, choose_url: true }
+
+      - name: footer_info
+        label: तळटीप माहिती (Footer Info)
+        file: src/content/site/footer.json
+        fields:
+          - name: copyrightOwner
+            label: कॉपीराइट मालक (Copyright Owner)
+            widget: object
+            collapsed: true
+            fields:
+              - { name: mr, label: मराठी, widget: string }
+              - { name: en, label: इंग्रजी, widget: string }
+          - name: rightsReservedText
+            label: हक्क राखीव मजकूर (Rights Reserved Text)
+            widget: object
+            collapsed: true
+            fields:
+              - { name: mr, label: मराठी, widget: string }
+              - { name: en, label: इंग्रजी, widget: string }
+
+      - name: privacy_policy
+        label: गोपनीयता धोरण (Privacy Policy)
+        file: src/content/site/privacy.json
+        fields:
+          - name: meta
+            label: मेटा माहिती (Meta Info)
+            widget: object
+            collapsed: true
+            fields:
+              - name: title
+                label: शीर्षक (Title)
+                widget: object
+                collapsed: true
+                fields:
+                  - { name: mr, label: मराठी, widget: string }
+                  - { name: en, label: इंग्रजी, widget: string }
+              - name: description
+                label: वर्णन (Description)
+                widget: object
+                collapsed: true
+                fields:
+                  - { name: mr, label: मराठी, widget: string }
+                  - { name: en, label: इंग्रजी, widget: string }
+          - name: header
+            label: हेडर (Header)
+            widget: object
+            collapsed: true
+            fields:
+              - name: eyebrow
+                label: आयब्रो (Eyebrow)
+                widget: object
+                collapsed: true
+                fields:
+                  - { name: mr, label: मराठी, widget: string }
+                  - { name: en, label: इंग्रजी, widget: string }
+              - name: title
+                label: शीर्षक (Title)
+                widget: object
+                collapsed: true
+                fields:
+                  - { name: mr, label: मराठी, widget: string }
+                  - { name: en, label: इंग्रजी, widget: string }
+              - name: subtitle
+                label: उपशीर्षक (Subtitle)
+                widget: object
+                collapsed: true
+                fields:
+                  - { name: mr, label: मराठी, widget: string }
+                  - { name: en, label: इंग्रजी, widget: string }
+          - name: updated
+            label: अद्यतनित दिनांक (Updated Date Text)
+            widget: object
+            collapsed: true
+            fields:
+              - { name: mr, label: मराठी, widget: string }
+              - { name: en, label: इंग्रजी, widget: string }
+          - name: blocks
+            label: माहितीचे विभाग (Content Blocks)
+            widget: list
+            summary: '{{fields.title.mr}}'
+            fields:
+              - name: title
+                label: विभाग शीर्षक (Section Title)
+                widget: object
+                collapsed: true
+                fields:
+                  - { name: mr, label: मराठी, widget: string }
+                  - { name: en, label: इंग्रजी, widget: string }
+              - name: paragraphs
+                label: परिच्छेद (Paragraphs)
+                widget: object
+                collapsed: true
+                fields:
+                  - name: mr
+                    label: मराठी परिच्छेद
+                    widget: list
+                    field: { name: p, label: परिच्छेद, widget: text }
+                  - name: en
+                    label: इंग्रजी परिच्छेद
+                    widget: list
+                    field: { name: p, label: परिच्छेद, widget: text }
+
+      - name: terms_of_service
+        label: सेवा अटी (Terms of Service)
+        file: src/content/site/terms.json
+        fields:
+          - name: meta
+            label: मेटा माहिती (Meta Info)
+            widget: object
+            collapsed: true
+            fields:
+              - name: title
+                label: शीर्षक (Title)
+                widget: object
+                collapsed: true
+                fields:
+                  - { name: mr, label: मराठी, widget: string }
+                  - { name: en, label: इंग्रजी, widget: string }
+              - name: description
+                label: वर्णन (Description)
+                widget: object
+                collapsed: true
+                fields:
+                  - { name: mr, label: मराठी, widget: string }
+                  - { name: en, label: इंग्रजी, widget: string }
+          - name: header
+            label: हेडर (Header)
+            widget: object
+            collapsed: true
+            fields:
+              - name: eyebrow
+                label: आयब्रो (Eyebrow)
+                widget: object
+                collapsed: true
+                fields:
+                  - { name: mr, label: मराठी, widget: string }
+                  - { name: en, label: इंग्रजी, widget: string }
+              - name: title
+                label: शीर्षक (Title)
+                widget: object
+                collapsed: true
+                fields:
+                  - { name: mr, label: मराठी, widget: string }
+                  - { name: en, label: इंग्रजी, widget: string }
+              - name: subtitle
+                label: उपशीर्षक (Subtitle)
+                widget: object
+                collapsed: true
+                fields:
+                  - { name: mr, label: मराठी, widget: string }
+                  - { name: en, label: इंग्रजी, widget: string }
+          - name: updated
+            label: अद्यतनित दिनांक (Updated Date Text)
+            widget: object
+            collapsed: true
+            fields:
+              - { name: mr, label: मराठी, widget: string }
+              - { name: en, label: इंग्रजी, widget: string }
+          - name: blocks
+            label: माहितीचे विभाग (Content Blocks)
+            widget: list
+            summary: '{{fields.title.mr}}'
+            fields:
+              - name: title
+                label: विभाग शीर्षक (Section Title)
+                widget: object
+                collapsed: true
+                fields:
+                  - { name: mr, label: मराठी, widget: string }
+                  - { name: en, label: इंग्रजी, widget: string }
+              - name: paragraphs
+                label: परिच्छेद (Paragraphs)
+                widget: object
+                collapsed: true
+                fields:
+                  - name: mr
+                    label: मराठी परिच्छेद
+                    widget: list
+                    field: { name: p, label: परिच्छेद, widget: text }
+                  - name: en
+                    label: इंग्रजी परिच्छेद
+                    widget: list
+                    field: { name: p, label: परिच्छेद, widget: text }
