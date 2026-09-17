@@ -126,6 +126,43 @@ collections:
             label: YouTube ID (व्हिडिओसाठी)
             widget: string
             required: false
+  - name: trustees
+    label: विश्वस्त
+    icon: groups
+    folder: src/content/trustees
+    create: true
+    format: json
+    extension: json
+    slug: '{{slug}}'
+    summary: '{{fields.order}} - {{fields.name}} — {{fields.role}}'
+    sortable_fields: ['order', 'name']
+    fields:
+      - name: order
+        label: क्रम (Sequence/Index)
+        widget: number
+        value_type: int
+        hint: "हा नंबर वेबसाइटवरील क्रम ठरवेल (उदा. 1, 2, 3)."
+      - name: name
+        label: नाव (मराठी)
+        widget: string
+      - name: role
+        label: भूमिका (Role key)
+        widget: select
+        options:
+          - { label: "अध्यक्ष", value: "Chairman" }
+          - { label: "उपाध्यक्ष", value: "Vice Chairman" }
+          - { label: "सचिव", value: "Secretary" }
+          - { label: "कोषाध्यक्ष", value: "Treasurer" }
+          - { label: "विश्वस्त", value: "Trustee" }
+          - { label: "स्विकृत विश्वस्त", value: "Co-opted Trustee" }
+          - { label: "व्यवस्थापक", value: "Manager" }
+        hint: Labels on the site come from i18n; this value must match the key.
+      - name: image
+        label: छायाचित्र
+        widget: image
+        required: true
+        choose_url: true
+        hint: Upload saves under public/uploads (e.g. trustees/). URL tab if the file already exists in the repo.
   - name: site_data
     label: साइट डेटा
     icon: database
@@ -188,36 +225,7 @@ collections:
                 label: वेळ
                 widget: string
                 collapsed: true
-      - name: trustees
-        label: विश्वस्त
-        file: src/content/trustees/trustees.json
-        fields:
-          - name: trustees
-            label: विश्वस्त
-            widget: list
-            summary: '{{fields.name}} — {{fields.role}}'
-            fields:
-              - name: name
-                label: नाव (मराठी)
-                widget: string
-              - name: role
-                label: भूमिका (Role key)
-                widget: select
-                options:
-                  - { label: "अध्यक्ष", value: "Chairman" }
-                  - { label: "उपाध्यक्ष", value: "Vice Chairman" }
-                  - { label: "सचिव", value: "Secretary" }
-                  - { label: "कोषाध्यक्ष", value: "Treasurer" }
-                  - { label: "विश्वस्त", value: "Trustee" }
-                  - { label: "स्विकृत विश्वस्त", value: "Co-opted Trustee" }
-                  - { label: "व्यवस्थापक", value: "Manager" }
-                hint: Labels on the site come from i18n; this value must match the key.
-              - name: image
-                label: छायाचित्र
-                widget: image
-                required: true
-                choose_url: true
-                hint: Upload saves under public/uploads (e.g. trustees/). URL tab if the file already exists in the repo.
+
       - name: premises_showcase
         label: परिसर दर्शन
         file: src/content/premises/showcase.json
@@ -404,6 +412,19 @@ collections:
           - name: email
             label: ईमेल (Email)
             widget: string
+          - name: management
+            label: व्यवस्थापन (Management)
+            widget: object
+            fields:
+              - name: name
+                label: संस्थेचे नाव (Trust Name)
+                widget: string
+              - name: registration
+                label: नोंदणी क्रमांक (Registration Number)
+                widget: string
+              - name: date
+                label: दिनांक (Date)
+                widget: string
       - name: donation_info
         label: देणगी माहिती (Donation Info)
         file: src/content/site/donation.json
