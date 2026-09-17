@@ -103,29 +103,24 @@ collections:
       - name: items
         label: आयटम
         widget: list
-        summary: '{{fields.type}} — {{fields.src}}'
+        summary: '{{fields.src}}'
         fields:
-          - name: type
-            label: प्रकार
-            widget: select
-            options:
-              - image
-              - video
           - name: src
-            label: छायाचित्र (अपलोड) किंवा व्हिडिओ URL
+            label: छायाचित्र (Upload Image)
             widget: file
             required: false
             choose_url: true
-            hint: For type image, upload or choose a file. For type video, use the URL tab with a YouTube link.
+            hint: Upload a photo here. If you are embedding a video/post, you can leave this blank (or upload a thumbnail).
           - name: alt
             label: पर्यायी मजकूर (Alt text)
             widget: string
             required: false
             collapsed: true
-          - name: youtubeId
-            label: YouTube ID (व्हिडिओसाठी)
-            widget: string
+          - name: videoUrl
+            label: व्हिडिओ URL किंवा एम्बेड कोड (Video URL or Embed Code)
+            widget: text
             required: false
+            hint: Paste a YouTube URL, or the full HTML embed code (e.g. <iframe>) for Facebook or Instagram.
   - name: trustees
     label: विश्वस्त
     icon: groups
@@ -188,10 +183,11 @@ collections:
                 widget: image
                 required: false
                 choose_url: true
-              - name: youtubeVideoId
-                label: YouTube व्हिडिओ ID
-                widget: string
+              - name: embedCode
+                label: एम्बेड कोड (Embed HTML)
+                widget: text
                 required: false
+                hint: Paste the full embed HTML code (like <iframe>...) from YouTube, Facebook, or Instagram.
               - name: title
                 label: शीर्षक
                 widget: string
