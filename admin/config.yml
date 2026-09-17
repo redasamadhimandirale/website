@@ -6,13 +6,9 @@ backend:
   repo: redasamadhimandirale/WebsiteSourceCode
   branch: release
   base_url: https://oauth.redasamadhimandirale.workers.dev
-  # NOTE: To use this worker, ensure it sends the 'Cross-Origin-Opener-Policy: same-origin-allow-popups' header.
-
 site_url: https://redasamadhimandirale.github.io/website/
-
 media_folder: public/uploads
 public_folder: /uploads
-
 collections:
   - name: news
     label: घडामोडी व घोषणा
@@ -21,45 +17,46 @@ collections:
     folder: src/content/news
     create: true
     slug: '{{slug}}'
-    summary: '{{title.mr}}'
+    summary: '{{title}}'
     extension: md
     format: frontmatter
     fields:
       - name: title
         label: शीर्षक
-        widget: object
+        widget: text
         collapsed: true
-        fields:
-          - { name: mr, label: मराठी, widget: text }
-          - { name: en, label: इंग्रजी, widget: string }
-      - { name: date, label: दिनांक, widget: datetime, date_format: YYYY-MM-DD, time_format: false }
+      - name: date
+        label: दिनांक
+        widget: datetime
+        date_format: YYYY-MM-DD
+        time_format: false
       - name: isEmbed
         label: फक्त सोशल मीडिया लिंक (Embed) आहे का?
         widget: select
-        options: [yes, no]
-        default: no
+        options:
+          - 'yes'
+          - 'no'
+        default: 'no'
         hint: Turn on to hide manual text fields and provide an embed URL.
       - name: embedCode
         label: सोशल मीडिया एम्बेड कोड (Embed HTML)
         widget: text
         required: false
-        hint: 'Paste the full embed HTML code (like <iframe>...) from YouTube, Facebook, or Instagram. (Use only if "isEmbed" is yes)'
+        hint: Paste the full embed HTML code (like <iframe>...) from YouTube, Facebook, or Instagram. (Use only if "isEmbed" is yes)
       - name: excerpt
         label: सारांश
-        widget: object
+        widget: text
         required: false
         collapsed: true
-        fields:
-          - { name: mr, label: मराठी, widget: text }
-          - { name: en, label: इंग्रजी, widget: text }
-      - { name: draft, label: मसुदा (वेबसाइटवरून लपवा), widget: boolean, default: false }
-      - {
-          name: showOnHome,
-          label: मुख्यपृष्ठावर दाखवा (नवीनतम ओळ),
-          widget: boolean,
-          default: true,
-          hint: 'Turn off to keep the post on the News page only (still public when not draft).',
-        }
+      - name: draft
+        label: मसुदा (वेबसाइटवरून लपवा)
+        widget: boolean
+        default: false
+      - name: showOnHome
+        label: मुख्यपृष्ठावर दाखवा (नवीनतम ओळ)
+        widget: boolean
+        default: true
+        hint: Turn off to keep the post on the News page only (still public when not draft).
       - name: coverImage
         label: कव्हर छायाचित्र
         widget: image
@@ -74,12 +71,8 @@ collections:
           name: tag
           label: टॅग
           widget: string
-      - name: body_mr
+      - name: body
         label: मुख्य मजकूर (मराठी)
-        widget: markdown
-        required: false
-      - name: body_en
-        label: मुख्य मजकूर (इंग्रजी)
         widget: markdown
         required: false
   - name: galleries
@@ -89,25 +82,19 @@ collections:
     folder: src/content/galleries
     create: true
     slug: '{{slug}}'
-    summary: '{{title.mr}}'
+    summary: '{{title}}'
     extension: json
     format: json
     fields:
       - name: title
         label: शीर्षक
-        widget: object
+        widget: string
         collapsed: true
-        fields:
-          - { name: mr, label: मराठी, widget: string }
-          - { name: en, label: इंग्रजी, widget: string }
       - name: description
         label: वर्णन
-        widget: object
+        widget: text
         required: false
         collapsed: true
-        fields:
-          - { name: mr, label: मराठी, widget: text }
-          - { name: en, label: इंग्रजी, widget: text }
       - name: coverImage
         label: कव्हर छायाचित्र
         widget: image
@@ -121,7 +108,9 @@ collections:
           - name: type
             label: प्रकार
             widget: select
-            options: [image, video]
+            options:
+              - image
+              - video
           - name: src
             label: छायाचित्र (अपलोड) किंवा व्हिडिओ URL
             widget: file
@@ -130,14 +119,13 @@ collections:
             hint: For type image, upload or choose a file. For type video, use the URL tab with a YouTube link.
           - name: alt
             label: पर्यायी मजकूर (Alt text)
-            widget: object
+            widget: string
             required: false
             collapsed: true
-            fields:
-              - { name: mr, label: मराठी, widget: string }
-              - { name: en, label: इंग्रजी, widget: string }
-          - { name: youtubeId, label: YouTube ID (व्हिडिओसाठी), widget: string, required: false }
-
+          - name: youtubeId
+            label: YouTube ID (व्हिडिओसाठी)
+            widget: string
+            required: false
   - name: site_data
     label: साइट डेटा
     icon: database
@@ -151,53 +139,42 @@ collections:
             widget: list
             summary: '{{fields.slug}}'
             fields:
-              - { name: slug, label: स्लग, widget: string }
-              - { name: order, label: क्रम, widget: number, value_type: int }
+              - name: slug
+                label: स्लग
+                widget: string
+              - name: order
+                label: क्रम
+                widget: number
+                value_type: int
               - name: image
                 label: पोस्टर छायाचित्र
                 widget: image
                 required: false
                 choose_url: true
-              - { name: youtubeVideoId, label: YouTube व्हिडिओ ID, widget: string, required: false }
+              - name: youtubeVideoId
+                label: YouTube व्हिडिओ ID
+                widget: string
+                required: false
               - name: title
                 label: शीर्षक
-                widget: object
+                widget: string
                 collapsed: true
-                fields:
-                  - { name: mr, label: मराठी, widget: string }
-                  - { name: en, label: इंग्रजी, widget: string }
               - name: excerpt
                 label: सारांश
-                widget: object
+                widget: text
                 collapsed: true
-                fields:
-                  - { name: mr, label: मराठी, widget: text }
-                  - { name: en, label: इंग्रजी, widget: text }
               - name: paragraphs
                 label: परिच्छेद
-                widget: object
+                widget: list
                 collapsed: true
-                fields:
-                  - name: mr
-                    label: मराठी परिच्छेद
-                    widget: list
-                    field: { name: paragraph, label: परिच्छेद, widget: text }
-                  - name: en
-                    label: इंग्रजी परिच्छेद
-                    widget: list
-                    field: { name: paragraph, label: परिच्छेद, widget: text }
-
       - name: darshan_schedule
         label: दर्शन वेळापत्रक
         file: src/content/darshan/schedule.json
         fields:
           - name: notes
             label: नोंदी
-            widget: object
+            widget: text
             collapsed: true
-            fields:
-              - { name: mr, label: मराठी, widget: text }
-              - { name: en, label: इंग्रजी, widget: text }
           - name: slots
             label: वेळा
             widget: list
@@ -205,19 +182,12 @@ collections:
             fields:
               - name: label
                 label: लेबल
-                widget: object
+                widget: string
                 collapsed: true
-                fields:
-                  - { name: mr, label: मराठी, widget: string }
-                  - { name: en, label: इंग्रजी, widget: string }
               - name: time
                 label: वेळ
-                widget: object
+                widget: string
                 collapsed: true
-                fields:
-                  - { name: mr, label: मराठी, widget: string }
-                  - { name: en, label: इंग्रजी, widget: string }
-
       - name: trustees
         label: विश्वस्त
         file: src/content/trustees/trustees.json
@@ -225,19 +195,22 @@ collections:
           - name: trustees
             label: विश्वस्त
             widget: list
-            summary: '{{fields.name-en}} — {{fields.role}}'
+            summary: '{{fields.name}} — {{fields.role}}'
             fields:
-              - { name: name-en, label: नाव (इंग्रजी), widget: string }
-              - { name: name-mr, label: नाव (मराठी), widget: string }
+              - name: name
+                label: नाव (मराठी)
+                widget: string
               - name: role
                 label: भूमिका (Role key)
                 widget: select
                 options:
-                  - Chairman
-                  - Vice Chairman
-                  - Secretary
-                  - Treasurer
-                  - Trustee
+                  - { label: "अध्यक्ष", value: "Chairman" }
+                  - { label: "उपाध्यक्ष", value: "Vice Chairman" }
+                  - { label: "सचिव", value: "Secretary" }
+                  - { label: "कोषाध्यक्ष", value: "Treasurer" }
+                  - { label: "विश्वस्त", value: "Trustee" }
+                  - { label: "स्विकृत विश्वस्त", value: "Co-opted Trustee" }
+                  - { label: "व्यवस्थापक", value: "Manager" }
                 hint: Labels on the site come from i18n; this value must match the key.
               - name: image
                 label: छायाचित्र
@@ -245,7 +218,6 @@ collections:
                 required: true
                 choose_url: true
                 hint: Upload saves under public/uploads (e.g. trustees/). URL tab if the file already exists in the repo.
-
       - name: premises_showcase
         label: परिसर दर्शन
         file: src/content/premises/showcase.json
@@ -273,35 +245,47 @@ collections:
                 widget: image
                 required: true
                 choose_url: true
-
       - name: social_links
         label: सामाजिक दुवे
         file: src/content/site/social.json
         fields:
-          - { name: facebook, label: Facebook URL, widget: string }
-          - { name: instagram, label: Instagram URL, widget: string }
-          - { name: youtube, label: YouTube URL, widget: string }
-
+          - name: facebook
+            label: Facebook URL
+            widget: string
+          - name: instagram
+            label: Instagram URL
+            widget: string
+          - name: youtube
+            label: YouTube URL
+            widget: string
       - name: history_mr
         label: इतिहास (मराठी)
         file: src/content/history/narrative-mr.json
         fields:
-          - { name: openingVerses, label: सुरुवातीचे श्लोक, widget: text }
+          - name: openingVerses
+            label: सुरुवातीचे श्लोक
+            widget: text
           - name: paragraphs
             label: परिच्छेद
             widget: list
-            field: { name: paragraph, label: परिच्छेद, widget: text }
-
+            field:
+              name: paragraph
+              label: परिच्छेद
+              widget: text
       - name: history_en
         label: इतिहास (इंग्रजी)
         file: src/content/history/narrative-en.json
         fields:
-          - { name: openingVerses, label: सुरुवातीचे श्लोक, widget: text }
+          - name: openingVerses
+            label: सुरुवातीचे श्लोक
+            widget: text
           - name: paragraphs
             label: परिच्छेद
             widget: list
-            field: { name: paragraph, label: परिच्छेद, widget: text }
-
+            field:
+              name: paragraph
+              label: परिच्छेद
+              widget: text
       - name: nearby_places
         label: जवळपासची प्रेक्षणीय स्थळे (Nearby Places)
         file: src/content/nearby/places.json
@@ -316,24 +300,18 @@ collections:
                 widget: string
               - name: name
                 label: नाव
-                widget: object
+                widget: string
                 collapsed: true
-                fields:
-                  - { name: mr, label: मराठी, widget: string }
-                  - { name: en, label: इंग्रजी, widget: string }
               - name: excerpt
                 label: सारांश
-                widget: object
+                widget: text
                 collapsed: true
-                fields:
-                  - { name: mr, label: मराठी, widget: text }
-                  - { name: en, label: इंग्रजी, widget: text }
               - name: image
                 label: छायाचित्र
                 widget: image
                 choose_url: true
               - name: hash
-                label: हॅश लिंक (उदा. #ashtavinayak)
+                label: हॅश लिंक (उदा.
                 widget: string
           - name: categories
             label: वर्ग (Categories)
@@ -345,19 +323,13 @@ collections:
                 widget: string
               - name: title
                 label: शीर्षक
-                widget: object
+                widget: string
                 collapsed: true
-                fields:
-                  - { name: mr, label: मराठी, widget: string }
-                  - { name: en, label: इंग्रजी, widget: string }
               - name: intro
                 label: प्रस्तावना
-                widget: object
+                widget: text
                 required: false
                 collapsed: true
-                fields:
-                  - { name: mr, label: मराठी, widget: text }
-                  - { name: en, label: इंग्रजी, widget: text }
               - name: subsections
                 label: उपविभाग
                 widget: list
@@ -369,11 +341,8 @@ collections:
                     widget: string
                   - name: title
                     label: शीर्षक
-                    widget: object
+                    widget: string
                     collapsed: true
-                    fields:
-                      - { name: mr, label: मराठी, widget: string }
-                      - { name: en, label: इंग्रजी, widget: string }
                   - name: items
                     label: ठिकाणे
                     widget: list
@@ -381,19 +350,13 @@ collections:
                     fields:
                       - name: name
                         label: नाव
-                        widget: object
+                        widget: string
                         collapsed: true
-                        fields:
-                          - { name: mr, label: मराठी, widget: string }
-                          - { name: en, label: इंग्रजी, widget: string }
                       - name: location
                         label: ठिकाण (कंसात)
-                        widget: object
+                        widget: string
                         required: false
                         collapsed: true
-                        fields:
-                          - { name: mr, label: मराठी, widget: string }
-                          - { name: en, label: इंग्रजी, widget: string }
                       - name: image
                         label: छायाचित्र
                         widget: image
@@ -407,80 +370,86 @@ collections:
                 fields:
                   - name: name
                     label: नाव
-                    widget: object
+                    widget: string
                     collapsed: true
-                    fields:
-                      - { name: mr, label: मराठी, widget: string }
-                      - { name: en, label: इंग्रजी, widget: string }
                   - name: location
                     label: ठिकाण (कंसात)
-                    widget: object
+                    widget: string
                     required: false
                     collapsed: true
-                    fields:
-                      - { name: mr, label: मराठी, widget: string }
-                      - { name: en, label: इंग्रजी, widget: string }
                   - name: image
                     label: छायाचित्र
                     widget: image
                     required: false
                     choose_url: true
-
       - name: contact_info
         label: संपर्क माहिती (Contact Info)
         file: src/content/site/contact.json
         fields:
           - name: addressLine1
             label: पत्ता ओळ १ (Address Line 1)
-            widget: object
+            widget: string
             collapsed: true
-            fields:
-              - { name: mr, label: मराठी, widget: string }
-              - { name: en, label: इंग्रजी, widget: string }
           - name: addressLine2
             label: पत्ता ओळ २ (Address Line 2)
-            widget: object
+            widget: string
             collapsed: true
-            fields:
-              - { name: mr, label: मराठी, widget: string }
-              - { name: en, label: इंग्रजी, widget: string }
           - name: phone
             label: फोन नंबर (Phone)
             widget: list
-            field: { name: number, label: नंबर (Number), widget: string }
-          - { name: email, label: ईमेल (Email), widget: string }
-
+            field:
+              name: number
+              label: नंबर (Number)
+              widget: string
+          - name: email
+            label: ईमेल (Email)
+            widget: string
       - name: donation_info
         label: देणगी माहिती (Donation Info)
         file: src/content/site/donation.json
         fields:
-          - { name: accountNoValue, label: खाते क्रमांक (Account No.), widget: string }
-          - { name: ifscValue, label: IFSC कोड (IFSC Code), widget: string }
-          - { name: bankValue, label: बँकेचे नाव (Bank Name), widget: string }
-          - { name: branchValue, label: शाखा (Branch), widget: string }
-          - { name: tax80gRegistrationValue, label: 80G नोंदणी क्रमांक (80G Reg. No.), widget: string }
-          - { name: tax80gDatedValue, label: नोंदणी दिनांक (80G Dated), widget: string }
-          - { name: qrImage, label: UPI QR कोड (UPI QR Code Image), widget: image, choose_url: true }
-
+          - name: accountNoValue
+            label: खाते क्रमांक (Account No.)
+            widget: string
+          - name: ifscValue
+            label: IFSC कोड (IFSC Code)
+            widget: string
+          - name: bankValue
+            label: बँकेचे नाव (Bank Name)
+            widget: string
+          - name: branchValue
+            label: शाखा (Branch)
+            widget: string
+          - name: tax80gRegistrationValue
+            label: 80G नोंदणी क्रमांक (80G Reg. No.)
+            widget: string
+          - name: tax80gDatedValue
+            label: नोंदणी दिनांक (80G Dated)
+            widget: string
+          - name: qrImage
+            label: UPI QR कोड (UPI QR Code Image)
+            widget: image
+            choose_url: true
+      - name: general_info
+        label: सर्वसाधारण माहिती (General Info)
+        file: src/content/site/general.json
+        fields:
+          - name: siteName
+            label: साइटचे नाव (Site Name)
+            widget: string
+            collapsed: true
       - name: footer_info
         label: तळटीप माहिती (Footer Info)
         file: src/content/site/footer.json
         fields:
           - name: copyrightOwner
             label: कॉपीराइट मालक (Copyright Owner)
-            widget: object
+            widget: string
             collapsed: true
-            fields:
-              - { name: mr, label: मराठी, widget: string }
-              - { name: en, label: इंग्रजी, widget: string }
           - name: rightsReservedText
             label: हक्क राखीव मजकूर (Rights Reserved Text)
-            widget: object
+            widget: string
             collapsed: true
-            fields:
-              - { name: mr, label: मराठी, widget: string }
-              - { name: en, label: इंग्रजी, widget: string }
-
       - name: privacy_policy
         label: गोपनीयता धोरण (Privacy Policy)
         file: src/content/site/privacy.json
@@ -492,18 +461,12 @@ collections:
             fields:
               - name: title
                 label: शीर्षक (Title)
-                widget: object
+                widget: string
                 collapsed: true
-                fields:
-                  - { name: mr, label: मराठी, widget: string }
-                  - { name: en, label: इंग्रजी, widget: string }
               - name: description
                 label: वर्णन (Description)
-                widget: object
+                widget: string
                 collapsed: true
-                fields:
-                  - { name: mr, label: मराठी, widget: string }
-                  - { name: en, label: इंग्रजी, widget: string }
           - name: header
             label: हेडर (Header)
             widget: object
@@ -511,32 +474,20 @@ collections:
             fields:
               - name: eyebrow
                 label: आयब्रो (Eyebrow)
-                widget: object
+                widget: string
                 collapsed: true
-                fields:
-                  - { name: mr, label: मराठी, widget: string }
-                  - { name: en, label: इंग्रजी, widget: string }
               - name: title
                 label: शीर्षक (Title)
-                widget: object
+                widget: string
                 collapsed: true
-                fields:
-                  - { name: mr, label: मराठी, widget: string }
-                  - { name: en, label: इंग्रजी, widget: string }
               - name: subtitle
                 label: उपशीर्षक (Subtitle)
-                widget: object
+                widget: string
                 collapsed: true
-                fields:
-                  - { name: mr, label: मराठी, widget: string }
-                  - { name: en, label: इंग्रजी, widget: string }
           - name: updated
             label: अद्यतनित दिनांक (Updated Date Text)
-            widget: object
+            widget: string
             collapsed: true
-            fields:
-              - { name: mr, label: मराठी, widget: string }
-              - { name: en, label: इंग्रजी, widget: string }
           - name: blocks
             label: माहितीचे विभाग (Content Blocks)
             widget: list
@@ -544,25 +495,12 @@ collections:
             fields:
               - name: title
                 label: विभाग शीर्षक (Section Title)
-                widget: object
+                widget: string
                 collapsed: true
-                fields:
-                  - { name: mr, label: मराठी, widget: string }
-                  - { name: en, label: इंग्रजी, widget: string }
               - name: paragraphs
                 label: परिच्छेद (Paragraphs)
-                widget: object
+                widget: list
                 collapsed: true
-                fields:
-                  - name: mr
-                    label: मराठी परिच्छेद
-                    widget: list
-                    field: { name: p, label: परिच्छेद, widget: text }
-                  - name: en
-                    label: इंग्रजी परिच्छेद
-                    widget: list
-                    field: { name: p, label: परिच्छेद, widget: text }
-
       - name: terms_of_service
         label: सेवा अटी (Terms of Service)
         file: src/content/site/terms.json
@@ -574,18 +512,12 @@ collections:
             fields:
               - name: title
                 label: शीर्षक (Title)
-                widget: object
+                widget: string
                 collapsed: true
-                fields:
-                  - { name: mr, label: मराठी, widget: string }
-                  - { name: en, label: इंग्रजी, widget: string }
               - name: description
                 label: वर्णन (Description)
-                widget: object
+                widget: string
                 collapsed: true
-                fields:
-                  - { name: mr, label: मराठी, widget: string }
-                  - { name: en, label: इंग्रजी, widget: string }
           - name: header
             label: हेडर (Header)
             widget: object
@@ -593,32 +525,20 @@ collections:
             fields:
               - name: eyebrow
                 label: आयब्रो (Eyebrow)
-                widget: object
+                widget: string
                 collapsed: true
-                fields:
-                  - { name: mr, label: मराठी, widget: string }
-                  - { name: en, label: इंग्रजी, widget: string }
               - name: title
                 label: शीर्षक (Title)
-                widget: object
+                widget: string
                 collapsed: true
-                fields:
-                  - { name: mr, label: मराठी, widget: string }
-                  - { name: en, label: इंग्रजी, widget: string }
               - name: subtitle
                 label: उपशीर्षक (Subtitle)
-                widget: object
+                widget: string
                 collapsed: true
-                fields:
-                  - { name: mr, label: मराठी, widget: string }
-                  - { name: en, label: इंग्रजी, widget: string }
           - name: updated
             label: अद्यतनित दिनांक (Updated Date Text)
-            widget: object
+            widget: string
             collapsed: true
-            fields:
-              - { name: mr, label: मराठी, widget: string }
-              - { name: en, label: इंग्रजी, widget: string }
           - name: blocks
             label: माहितीचे विभाग (Content Blocks)
             widget: list
@@ -626,21 +546,9 @@ collections:
             fields:
               - name: title
                 label: विभाग शीर्षक (Section Title)
-                widget: object
+                widget: string
                 collapsed: true
-                fields:
-                  - { name: mr, label: मराठी, widget: string }
-                  - { name: en, label: इंग्रजी, widget: string }
               - name: paragraphs
                 label: परिच्छेद (Paragraphs)
-                widget: object
+                widget: list
                 collapsed: true
-                fields:
-                  - name: mr
-                    label: मराठी परिच्छेद
-                    widget: list
-                    field: { name: p, label: परिच्छेद, widget: text }
-                  - name: en
-                    label: इंग्रजी परिच्छेद
-                    widget: list
-                    field: { name: p, label: परिच्छेद, widget: text }
