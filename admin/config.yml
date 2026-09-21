@@ -162,6 +162,46 @@ collections:
     label: साइट डेटा
     icon: database
     files:
+      - name: home_page
+        label: मुख्यपृष्ठ (Home Page)
+        file: src/content/site/home.json
+        fields:
+          - name: heroBanner
+            label: मुख्य बॅनर (Hero Banner)
+            widget: object
+            fields:
+              - name: type
+                label: प्रकार (Type)
+                widget: select
+                options:
+                  - { label: "छायाचित्र (Image)", value: "image" }
+                  - { label: "व्हिडिओ (Video)", value: "video" }
+              - name: src
+                label: फाइल (File) - Desktop/Tablet
+                widget: file
+                choose_url: true
+              - name: srcMobile
+                label: फाइल (File) - Mobile (पर्यायी/Optional)
+                widget: file
+                choose_url: true
+                required: false
+                hint: लहान स्क्रीनसाठी वेगळी फाईल द्यायची असल्यास (Optional mobile-specific file)
+              - name: poster
+                label: व्हिडिओ पोस्टर (Video Poster) - Desktop/Tablet
+                widget: image
+                choose_url: true
+                required: false
+                hint: फक्त व्हिडिओसाठी (Only for video)
+              - name: posterMobile
+                label: व्हिडिओ पोस्टर (Video Poster) - Mobile
+                widget: image
+                choose_url: true
+                required: false
+                hint: फक्त मोबाइल व्हिडिओसाठी (Only for mobile video)
+              - name: alt
+                label: पर्यायी मजकूर (Alt Text)
+                widget: string
+                required: false
       - name: festivals
         label: उत्सव
         file: src/content/festivals/festivals.json
